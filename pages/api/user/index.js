@@ -10,14 +10,14 @@ const handler = async (req, res) => {
         if (name && email && password) {
             try {
                 // Hash password to store it in DB
-                var passwordhash = await bcrypt.sign(password);
-                var user = new User({
+                const passwordhash = await bcrypt.sign(password);
+                const user = new User({
                     name,
                     email,
                     password: passwordhash,
                 });
                 // Create new user
-                var usercreated = await user.save();
+                const usercreated = await user.save();
                 return res.status(200).send(usercreated);
             } catch (error) {
                 return res.status(500).send(error.message);

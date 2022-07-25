@@ -1,0 +1,112 @@
+task api:
+import Task from '../models/Task ; 
+import { ClassNames } from '@emotion/react';
+import { Style } from '@mui/icons-material';
+import { type } from 'os';
+import dbConnect from '../utils/dbConnect'
+
+export default async (req, res) => 
+const { method } = req;
+
+    //connect to database 
+    await dbConnect();
+
+    //Create task 
+    if (method === "POST") {
+        try {
+            const newTask = await new Task(req.body).save();
+            res.status(201).json({ data: newTask, message: 'Task added successfully' })
+        } catch (error) {
+            res.status(500).json({ message: 'Internet Server Error' });
+            console.log(error);
+        }
+    };
+
+    // Get all tasks 
+    if (method === "GET") {
+        try {
+            const tasks = await Task.find();
+            res.status(200).json({ data: tasks })
+        } catch (error) {
+            res.status(500).json({ message: 'Inkernal Server Error' });
+            console.log(error);
+        }
+    }
+
+task api[id]:
+    import Task from '../models/Task ; 
+    import dbConnect from '../utils/dbConnect'
+
+    export default async (req, res) => {
+        const { method } = req;
+        const { id } = req.query;
+
+        //connect to database 
+        await dbConnect();
+
+        //Update task by id
+        if (method === "PUT") {
+            try {
+                const result = await Task.findByIDAndUpdate(id, { $set: req.body }, { new: true });
+                res.status(200).json({ data: result, message: "Task Updated Successfully" })
+            } catch (error) {
+                res.status(500).json({ message: 'Internet Server Error' });
+                console.log(error);
+            }
+        };
+
+        // Delete task by id 
+        if (method === "DELETE") {
+            try {
+                await Task.findByIdDelete(id);
+                res.status(200).json({ message: "Task Deleted Successfully" });
+            } catch (error) {
+                res.status(500).json({ message: 'Inkernal Server Error' });
+                console.log(error);
+            }
+        }
+
+        client:
+        import { useState } from "react";
+
+        export default function Home() {
+            const [tasks, setTasks] = useState([]);
+            const [task, setTask] = useState({ task: "" });
+            return (
+                <main className= { styles.main } >
+                <h1 className={ styles.heading }> TO - DO < /h1>
+                    < div className = { styles.container } >
+                        <form className={ styles.form_container }>
+                            <input 
+                    className={ styles.input }
+            type
+            placeholder
+            value = { task.task } />
+                <button type className >
+                    { task._id ? "Update" : "Add" }
+                    < /button> 
+                    < /form> 
+            {
+                tasks.map((task) => (
+                    <div className= { styles.task_container } key = { task._id } >
+                    <input 
+                    type 
+                    ClassName 
+                    checked = { task.copleted } />
+                    <P className={
+                        task.completed
+                            ? styles.task_text + "" + styles.line_through
+                            : styles.task_text
+                    }
+                    > { task.task } < /P> 
+                < button className = { styles.edit_task } &#9998; </button>
+                    < button className = { styles.remove_task } >&#10006; </button>
+                        < /div> 
+                ))
+            }
+            {
+                tasks.length === 0 && <h2 className={ Styles.no_tasks }> No Tasks < /h2> }
+                    < /div> 
+                    < /main> 
+    )
+            }
