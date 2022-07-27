@@ -7,25 +7,25 @@ import Typography from '@mui/material/Typography';
 
 const images = [
     {
-        url: 'header icons/home-2160318_960_720.png',
+        url: '/header/home-2160318_960_720.png',
         title: 'דף הבית',
         width: '100%',
         link: '/'
     },
     {
-        url: 'header icons/user-2517433_960_720.png',
+        url: '/header/user-2517433_960_720.png',
         title: 'משתמשים',
         width: '100%',
         link: '/users'
     },
     {
-        url: 'header icons/guide-960-720.png',
+        url: '/header/guide-960-720.png',
         title: 'הוראות',
         width: '100%',
         link: '/instructions'
     },
     {
-        url: 'header icons/project-6770193_960_720.png',
+        url: '/header/project-6770193_960_720.png',
         title: 'פרויקט',
         width: '100%',
         link: '/project'

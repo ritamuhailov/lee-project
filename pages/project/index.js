@@ -1,17 +1,11 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../project/Style.module.css'
-import mongoose from 'mongoose';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import { useState } from 'react';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import Task from '../../models/task';
-
+import { useState } from 'react';
 
 
 const style = {
@@ -57,114 +51,146 @@ function Project() {
             [property]: e.target.value
         })
     }
-
     console.log("task", task);
 
     const [taskList, setTaskList] = useState([]);
 
     const handleSubmit = (e) => {
-        // e.preventDefault();
-
-        setTaskList([
-            ...taskList, task
-        ]);
+        setTaskList([...taskList, task]);
         setOpen(false);
+        fetch('api/task', {
+            method: 'POST',
+            body: JSON.stringify(task),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(e => console.log(e))
     }
+
+    // const [projectName, setProjectName] = useState("");
+    // const handleNew = (e) => {
+
+    //     setProject(
+    //         ...projectName, e.target.value
+    //     )
+    // }
+
+    // const (projectList, setProjectList) = useState([]);
+    // const handleProject = (e) => {
+    //     setProjectList([
+    //         ...projectList, projectName
+    //     ])
+    // }
 
     console.log("taskList", taskList);
 
     // const handleChange = (event) => {
     //     setValue(event.target.value);
     // }; 
+
     return (
         <div>
-            <Stack spacing={2} direction="row">
-                <Button variant="contained" onClick={handleOpen}>הוסף משימה חדשה</Button>
-            </Stack>
+            <input id="title" type="text" placeholder="שם פרויקט" ></input>
+            <Button variant="contained" >צור פרויקט</Button>
+            {/* <div>
+                if (taskList.length === 0) {<h2 > No Tasks </h2>}
+                else {
+                    taskList}
+            </div> */}
+            <taskList />
 
-            <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description">
-                <Box sx={style}>
-                    <Typography id="modal-modal-title" variant="h6" component="h2" style={{ direction: 'rtl' }}>
-                        הוסף את פרטי המשימה החדשה
-                    </Typography>
-                    <Box
-                        // component="form"
-                        sx={{
-                            '& .MuiTextField-root': { m: 1 },
-                        }}
-                        // style={{ direction: 'rtl', flexDirection: 'column' }}
-                        noValidate
-                        autoComplete="off">
-                        <TextField
-                            id="filled-multiline-flexible"
-                            label="שם המשימה"
-                            fullWidth
-                            value={task.title}
-                            onChange={e => handleChange(e, "title")}
-                            variant="filled"
-                        />
-                        <TextField
-                            id="filled-multiline-static"
-                            label="פירוט/תיאור"
-                            fullWidth
-                            value={task.description}
-                            multiline
-                            onChange={e => handleChange(e, "description")}
-                            variant="filled"
-                        />
-                        <TextField
-                            id="filled-textarea"
-                            label="תאריך יעד"
-                            placeholder=""
-                            fullWidth
-                            value={task.dueDate}
-                            onChange={e => handleChange(e, "dueDate")}
-                            multiline
-                            variant="filled"
-                        />
-                        <TextField
-                            id="filled-textarea"
-                            label="תלויות במשימות אחרות"
-                            placeholder=""
-                            fullWidth
-                            value={task.dependencies}
-                            onChange={e => handleChange(e, "dependencies")}
-                            multiline
-                            variant="filled"
-                        />
-                        <TextField
-                            id="filled-textarea"
-                            label="באחריות מי"
-                            placeholder=""
-                            fullWidth
-                            value={task.responsibility}
-                            onChange={e => handleChange(e, "responsibility")}
-                            multiline
-                            variant="filled"
-                        />
-                        <TextField
-                            id="filled-textarea"
-                            label="בוצע/לא בוצע"
-                            placeholder=""
-                            fullWidth
-                            value={task.done}
-                            onChange={e => handleChange(e, "done")}
-                            multiline
-                            variant="filled"
-                        />
-                        <Box sx={{ direction: 'rtl', spacing: 10 }}>
-                            <Button variant="contained" onClick={handleSubmit}>צא ושמור</Button>
-                            <Button variant="contained" onClick={handleClose}>צא ללא שמירה</Button>
+            <div>
+                <Stack spacing={2} direction="row">
+                    <Button variant="contained" onClick={handleOpen}>הוסף משימה חדשה</Button>
+                </Stack>
+
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description">
+                    <Box sx={style}>
+                        <Typography id="modal-modal-title" variant="h6" component="h2" style={{ direction: 'rtl' }}>
+                            הוסף את פרטי המשימה החדשה
+                        </Typography>
+                        <Box
+                            // component="form"
+                            sx={{
+                                '& .MuiTextField-root': { m: 1 },
+                            }}
+                            // style={{ direction: 'rtl', flexDirection: 'column' }}
+                            noValidate
+                            autoComplete="off">
+                            <TextField
+                                id="filled-multiline-flexible"
+                                label="שם המשימה"
+                                fullWidth
+                                value={task.title}
+                                onChange={e => handleChange(e, "title")}
+                                variant="filled"
+                            />
+                            <TextField
+                                id="filled-multiline-static"
+                                label="פירוט/תיאור"
+                                fullWidth
+                                value={task.description}
+                                multiline
+                                onChange={e => handleChange(e, "description")}
+                                variant="filled"
+                            />
+                            <TextField
+                                id="filled-textarea"
+                                label="תאריך יעד"
+                                placeholder=""
+                                fullWidth
+                                value={task.dueDate}
+                                onChange={e => handleChange(e, "dueDate")}
+                                multiline
+                                variant="filled"
+                            />
+                            <TextField
+                                id="filled-textarea"
+                                label="תלויות במשימות אחרות"
+                                placeholder=""
+                                fullWidth
+                                value={task.dependencies}
+                                onChange={e => handleChange(e, "dependencies")}
+                                multiline
+                                variant="filled"
+                            />
+                            <TextField
+                                id="filled-textarea"
+                                label="באחריות מי"
+                                placeholder=""
+                                fullWidth
+                                value={task.responsibility}
+                                onChange={e => handleChange(e, "responsibility")}
+                                multiline
+                                variant="filled"
+                            />
+                            <TextField
+                                id="filled-textarea"
+                                label="בוצע/לא בוצע"
+                                placeholder=""
+                                fullWidth
+                                value={task.done}
+                                onChange={e => handleChange(e, "done")}
+                                multiline
+                                variant="filled"
+                            />
+                            <Box sx={{ direction: 'rtl', spacing: 10 }}>
+                                <Button variant="contained" onClick={handleSubmit}>צא ושמור</Button>
+                                <Button variant="contained" onClick={handleClose}>צא ללא שמירה</Button>
+                            </Box>
                         </Box>
                     </Box>
-                </Box>
 
-            </Modal>
-        </div>
+                </Modal>
+            </div>
+        </div >
     );
 }
 

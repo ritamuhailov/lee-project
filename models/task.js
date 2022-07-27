@@ -4,27 +4,27 @@ const Schema = mongoose.Schema;
 const task = new Schema({
     title: {
         type: String,
-        required: true
+        // required: true
     },
     description: {
         type: String,
-        required: true
+        // required: true
     },
     dueDate: {
-        type: Date,
-        required: true
+        type: String,
+        // required: true
     },
     dependenciesOnOtherTasks: {
         type: String,
-        required: true
+        // required: true
     },
     responsibleForExecution: {
         type: String,
-        required: true
+        // required: true
     },
     done: {
-        type: Boolean,
-        required: true
+        type: String,
+        // required: true
     }
 });
 

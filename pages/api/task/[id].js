@@ -1,12 +1,9 @@
-import task from '../models/task'
+import Task from '../models/task'
 import mongodb from '../middleware/mongodb'
 
-export default async (req, res) => {
+const projectById = async (req, res) => {
     const { method } = req;
     const { id } = req.query;
-
-    //connect to database 
-    await mongodb();
 
     //Update task by id
     if (method === "PUT") {
@@ -29,4 +26,6 @@ export default async (req, res) => {
             console.log(error);
         }
     }
-} 
+};
+
+export default mongodb(projectById);
