@@ -33,6 +33,7 @@ function Project() {
         }
 
     }
+
     const [value, setValue] = useState('');
 
     const [task, setTask] = useState({
@@ -70,20 +71,36 @@ function Project() {
             .catch(e => console.log(e))
     }
 
-    // const [projectName, setProjectName] = useState("");
-    // const handleNew = (e) => {
+    const [projectName, setProjectName] = useState("");
+    const handleNew = (e) => {
+        setProjectName(
+            e.target.value
+        )
+    }
 
-    //     setProject(
-    //         ...projectName, e.target.value
-    //     )
-    // }
+    const [projectList, setProjectList] = useState([]);
+    const handleProject = (e) => {
+        setProjectList([...projectList, projectName]);
+        setOpen(false);
+        fetch('api/project', {
+            method: 'POST',
+            body: JSON.stringify(projectName),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+            .catch(e => console.log(e))
+    }
 
-    // const (projectList, setProjectList) = useState([]);
+    console.log("projectName", projectName);
+    console.log("projectList", projectList);
     // const handleProject = (e) => {
     //     setProjectList([
     //         ...projectList, projectName
     //     ])
-    // }
+    // } 
 
     console.log("taskList", taskList);
 
@@ -93,14 +110,14 @@ function Project() {
 
     return (
         <div>
-            <input id="title" type="text" placeholder="שם פרויקט" ></input>
-            <Button variant="contained" >צור פרויקט</Button>
+            <input id="title" type="text" placeholder="שם פרויקט" onChange={handleNew} ></input>
+            <Button variant="contained" onClick={handleProject}>צור פרויקט</Button>
             {/* <div>
                 if (taskList.length === 0) {<h2 > No Tasks </h2>}
                 else {
                     taskList}
             </div> */}
-            <taskList />
+            {/* <taskList /> */}
 
             <div>
                 <Stack spacing={2} direction="row">
@@ -181,6 +198,7 @@ function Project() {
                                 multiline
                                 variant="filled"
                             />
+                            <Button>מחק משימה</Button>
                             <Box sx={{ direction: 'rtl', spacing: 10 }}>
                                 <Button variant="contained" onClick={handleSubmit}>צא ושמור</Button>
                                 <Button variant="contained" onClick={handleClose}>צא ללא שמירה</Button>

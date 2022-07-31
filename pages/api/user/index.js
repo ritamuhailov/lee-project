@@ -1,9 +1,9 @@
 // fetch('/api/users/123')
-import connectDB from '../../middleware/mongodb';
+import mongodb from '../../middleware/mongodb';
 import bcrypt from '../../middleware/bcrypt';
 import User from '../../models/user';
 
-const handler = async (req, res) => {
+const user = async (req, res) => {
     if (req.method === 'POST') {
         // Check if name, email or password is provided
         const { name, email, password } = req.body;
@@ -30,4 +30,4 @@ const handler = async (req, res) => {
     }
 };
 
-export default connectDB(handler); 
+export default mongodb(user); 

@@ -7,27 +7,27 @@ import Typography from '@mui/material/Typography';
 
 const images = [
     {
-        url: '/header/home-2160318_960_720.png',
+        url: '/header/Image_15.48.24.jpeg',
         title: 'דף הבית',
-        width: '100%',
+        width: '60%',
         link: '/'
     },
     {
-        url: '/header/user-2517433_960_720.png',
+        url: '/header/Image_15.48.53.jpeg',
         title: 'משתמשים',
-        width: '100%',
+        width: '60%',
         link: '/users'
     },
     {
-        url: '/header/guide-960-720.png',
+        url: '/header/Image_15.48.34.jpeg',
         title: 'הוראות',
-        width: '100%',
+        width: '60%',
         link: '/instructions'
     },
     {
-        url: '/header/project-6770193_960_720.png',
+        url: '/header/Image_15.48.46.jpeg',
         title: 'פרויקט',
-        width: '100%',
+        width: '60%',
         link: '/project'
     },
 ];
@@ -104,7 +104,7 @@ function Navbar() {
                     <a style={{ width: image.width }}>
                         <ImageButton
                             focusRipple
-                            style={{ width: '100%' }}
+                            style={{ width: '99%' }}
                         >
                             <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
                             <ImageBackdrop className="MuiImageBackdrop-root" />

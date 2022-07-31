@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Task from "./task";
 const Schema = mongoose.Schema;
 
 const project = new Schema({
@@ -13,7 +14,8 @@ const project = new Schema({
     done: {
         type: Boolean,
         required: true
-    }
+    },
+    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: Task }]
 });
 
 mongoose.models = {};

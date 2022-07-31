@@ -1,7 +1,7 @@
 import mongodb from '../../../middleware/mongodb';
 import Task from '../../../models/task';
 
-const project = async (req, res) => {
+const task = async (req, res) => {
     const { method } = req;
 
     //Create task 
@@ -9,6 +9,9 @@ const project = async (req, res) => {
         try {
             const task = new Task(req.body);
             const newTask = await task.save();
+
+            // ADD THIS TASK TO PROJECT
+            // Update the project tasks with newTask._id (push to tasks array)
             res.status(200).json({ data: newTask, message: 'Task added successfully' })
         } catch (error) {
             res.status(500).json({ message: 'Internal Server Error' });
@@ -28,4 +31,4 @@ const project = async (req, res) => {
     }
 };
 
-export default mongodb(project); 
+export default mongodb(task); 
