@@ -18,7 +18,7 @@ const task = async (req, res) => {
             console.log(error);
         }
     };
-    <div></div>
+
     // _id of project -> project_id
     // { project_id: 08675fvbnkjio7iryedrgfc, task}
     // const { project_id } = req.body
