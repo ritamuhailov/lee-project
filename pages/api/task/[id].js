@@ -1,5 +1,5 @@
 import Task from '../../../models/task'
-import mongodb from '../middleware/mongodb'
+import mongodb from '../../../middleware/mongodb'
 
 const projectById = async (req, res) => {
     const { method } = req;

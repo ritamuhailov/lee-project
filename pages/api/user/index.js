@@ -1,6 +1,6 @@
 // fetch('/api/users/123')
-// import mongodb from '../../middleware/mongodb';
-// import bcrypt from '../../middleware/bcrypt';
+// import mongodb from '../../../middleware/mongodb';
+
 // import User from '../../models/user';
 
 // const user = async (req, res) => {
