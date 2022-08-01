@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styles from "../task/Style.module.css"
+// import styles from "../task/Style.module.css"
 import { useState } from 'react'
 
 const Task = () => {
