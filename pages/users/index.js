@@ -11,36 +11,36 @@ import { useState } from 'react';
 
 function Users() { 
 
-    const [input, setInput] = useState({
-        email: "",
-        userName: "",
-        password: "" 
-    });
+    // const [input, setInput] = useState({
+    //     email: "",
+    //     userName: "",
+    //     password: "" 
+    // });
 
-    const handleChange = (e, property) => {
-        setInput({
-            ...input,
-            [property]: e.target.value
-        })
-    }
-    console.log("input", input); 
+    // const handleChange = (e, property) => {
+    //     setInput({
+    //         ...input,
+    //         [property]: e.target.value
+    //     })
+    // }
+    // console.log("input", input); 
 
-    const [user, setUser] = useState([]);
+    // const [user, setUser] = useState([]);
 
-    const handleSubmit = (e) => {
-        setUser({user}); 
-        // setOpen(false);
-        fetch('api/user', {
-            method: 'POST',
-            body: JSON.stringify(input),
-            headers: {
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .catch(e => console.log(e))
-    }
+    // const handleSubmit = (e) => {
+    //     setUser({user}); 
+    //     // setOpen(false);
+    //     fetch('api/user', {
+    //         method: 'POST',
+    //         body: JSON.stringify(input),
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => console.log(data))
+    //         .catch(e => console.log(e))
+    // }
     return (
         <Box className={styles.connectUser}
             component="form"
