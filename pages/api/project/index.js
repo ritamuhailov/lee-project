@@ -9,6 +9,7 @@ const project = async (req, res) => {
         try {
             const project = new Project(req.body);
             const newProject = await project.save();
+            console.log("newProject", newProject);
             res.status(200).json({ data: newProject, message: 'Project added successfully' })
         } catch (error) {
             res.status(500).json({ message: 'Internal Server Error' });

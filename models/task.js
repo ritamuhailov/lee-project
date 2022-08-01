@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const task = new Schema({
+    // project_id: { type: mongoose.Schema.Types.ObjectId, ref: "Project" },
     title: {
         type: String,
         // required: true
@@ -14,11 +15,11 @@ const task = new Schema({
         type: String,
         // required: true
     },
-    dependenciesOnOtherTasks: {
+    dependencies: {
         type: String,
         // required: true
     },
-    responsibleForExecution: {
+    responsibility: {
         type: String,
         // required: true
     },

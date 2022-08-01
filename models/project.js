@@ -5,15 +5,15 @@ const Schema = mongoose.Schema;
 const project = new Schema({
     title: {
         type: String,
-        required: true
+        // required: true
     },
     dueDate: {
         type: Date,
-        required: true
+        // required: true
     },
     done: {
         type: Boolean,
-        required: true
+        // required: true
     },
     tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: Task }]
 });

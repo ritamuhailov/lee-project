@@ -6,6 +6,9 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
 import { useState } from 'react';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 
 const style = {
@@ -35,6 +38,8 @@ function Project() {
     }
 
     const [value, setValue] = useState('');
+    const [projectId, setProjectId] = useState('');
+    // const [value, setValue] = React.useState(null);
 
     const [task, setTask] = useState({
         title: "",
@@ -61,7 +66,7 @@ function Project() {
         setOpen(false);
         fetch('api/task', {
             method: 'POST',
-            body: JSON.stringify(task),
+            body: JSON.stringify({ ...task, projectId }),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -84,25 +89,29 @@ function Project() {
         setOpen(false);
         fetch('api/project', {
             method: 'POST',
-            body: JSON.stringify(projectName),
+            body: JSON.stringify({ projectName }),
             headers: {
                 'Content-Type': 'application/json'
             },
         })
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(({ data }) => {
+                console.log(data);
+                setProjectId(data._id);
+                setTask({ ...task, "project_id": data._id })
+            })
             .catch(e => console.log(e))
     }
 
-    console.log("projectName", projectName);
-    console.log("projectList", projectList);
+    // console.log("projectName", projectName);
+    // console.log("projectList", projectList);
     // const handleProject = (e) => {
     //     setProjectList([
     //         ...projectList, projectName
     //     ])
     // } 
-
-    console.log("taskList", taskList);
+    React.useEffect(() => console.log(task), [task])
+    // console.log("taskList", taskList);
 
     // const handleChange = (event) => {
     //     setValue(event.target.value);
@@ -158,7 +167,7 @@ function Project() {
                                 onChange={e => handleChange(e, "description")}
                                 variant="filled"
                             />
-                            <TextField
+                            {/* <TextField
                                 id="filled-textarea"
                                 label="תאריך יעד"
                                 placeholder=""
@@ -166,8 +175,20 @@ function Project() {
                                 value={task.dueDate}
                                 onChange={e => handleChange(e, "dueDate")}
                                 multiline
-                                variant="filled"
-                            />
+                                variant="filled" */}
+                            <div style={{ direction: 'rtl' }}>
+                                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                    <DatePicker
+                                        label="Basic example"
+                                        value={value}
+                                        onChange={(newValue) => {
+                                            setValue(newValue);
+                                        }}
+                                        renderInput={(params) => <TextField {...params} />}
+                                    />
+                                </LocalizationProvider>
+                            </div>
+
                             <TextField
                                 id="filled-textarea"
                                 label="תלויות במשימות אחרות"
@@ -198,7 +219,7 @@ function Project() {
                                 multiline
                                 variant="filled"
                             />
-                            <Button>מחק משימה</Button>
+                            {/* <Button>מחק משימה</Button> */}
                             <Box sx={{ direction: 'rtl', spacing: 10 }}>
                                 <Button variant="contained" onClick={handleSubmit}>צא ושמור</Button>
                                 <Button variant="contained" onClick={handleClose}>צא ללא שמירה</Button>
