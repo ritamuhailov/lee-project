@@ -6,10 +6,11 @@ const Task = () => {
     const [userInput, setUserInput] = useState("")
     const [todoList, setTodoList] = useState([])
 
-    const handleChange = (e) =>
-        e.preventDefault()
+    const handleChange = (e) => {
 
-    setUserInput(e.target.value)
+        e.preventDefault()
+        setUserInput(e.target.value)
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
