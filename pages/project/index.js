@@ -118,7 +118,9 @@ function Project() {
     // }; 
 
     return (
+
         <div>
+            <div>.</div>
             <input id="title" type="text" placeholder="שם פרויקט" onChange={handleNew} ></input>
             <Button variant="contained" onClick={handleProject}>צור פרויקט</Button>
             {/* <div>
