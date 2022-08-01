@@ -53,23 +53,26 @@ function Users() {
             label="Email" 
             color="secondary" 
             focused placeholder="אימייל"
-            value={input.email}
+            // value={input.email}
             onChange={e => handleChange(e, "email")}  />
             <TextField 
             label="User Name" 
             color="secondary" 
             focused placeholder="שם משתמש"
-            value={input.userName}
+            // value={input.userName}
             onChange={e => handleChange(e, "userName")} />
             <TextField 
             label="Password" 
             color="secondary" 
             focused placeholder="סיסמא" 
-            value={input.password}
+            // value={input.password}
             onChange={e => handleChange(e, "password")}
             multiline />
             <div>
-                <Button classname={styles.connectButton} onClick={handleSubmit} variant="contained">התחבר</Button>
+                <Button 
+                classname={styles.connectButton} 
+                // onClick={handleSubmit} 
+                variant="contained">התחבר</Button>
                 {/* <Button variant="outlined">התחבר</Button> */}
             </div>
         </Box>
