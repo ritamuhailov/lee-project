@@ -17,17 +17,15 @@ const project = async (req, res) => {
             res.status(500).json({ message: 'Internal Server Error' });
             console.log(error);
         }
-    };
-
-    // if (method === "GET") {
-    //     try {
-    //         const project = await Project.find().populate(task);
-    //         res.status(200).json({ data: project })
-    //     } catch (error) {
-    //         res.status(500).json({ message: 'Internal Server Error' });
-    //         console.log(error);
-    //     }
-    // } 
+    } else if (method === "GET") {
+        try {
+            const project = await Project.find().populate('task');
+            res.status(200).json({ data: project })
+        } catch (error) {
+            res.status(500).json({ message: 'Internal Server Error' });
+            console.log(error);
+        }
+    }
 
     // App.get("/project/:projectId", async (req, res) => {
     //     const { projectId } = req.params;
