@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -103,19 +103,12 @@ function Project() {
             .catch(e => console.log(e))
     }
 
-    // console.log("projectName", projectName);
-    // console.log("projectList", projectList);
-    // const handleProject = (e) => {
-    //     setProjectList([
-    //         ...projectList, projectName
-    //     ])
-    // } 
-    React.useEffect(() => console.log(task), [task])
-    // console.log("taskList", taskList);
+    useEffect(() => {
+        fetch('api/task')
+            .then((res) => res.json())
+            .then((list) => { setTask(list); setTaskList(list) });
+    }, []);
 
-    // const handleChange = (event) => {
-    //     setValue(event.target.value);
-    // }; 
 
     return (
 
